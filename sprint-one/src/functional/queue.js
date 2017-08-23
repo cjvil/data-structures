@@ -7,6 +7,7 @@ var Queue = function() {
   // Implement the methods below
 
   someInstance.enqueue = function(value) {
+    count++;
   };
 
   someInstance.dequeue = function() {
