@@ -31,7 +31,20 @@ var LinkedList = function() {
   };
 
   list.contains = function(target) {
-    
+    var found = false;
+  
+    var search = function(node, target) {
+      if(node.value === target) {
+        found = true;
+      } else if(node.next !== null) {
+        search(node.next, target);
+      }
+        
+    };
+
+    search(list.head, target);
+
+    return found;
   };
 
   return list;
