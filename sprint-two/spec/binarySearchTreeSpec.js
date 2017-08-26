@@ -1,9 +1,11 @@
 describe('binarySearchTree', function() {
   var binarySearchTree;
-
+  var should = 'chai'.should;
+  // var should = require('chai').should;
   beforeEach(function() {
     binarySearchTree = BinarySearchTree(5);
   });
+
 
   it('should have methods named "insert", "contains", and "depthFirstLog', function() {
     expect(binarySearchTree.insert).to.be.a('function');
@@ -36,4 +38,12 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3]);
   });
+  
+  it('should throw an error when trying to add a value that is not the same type as the parent nodes value', function() {
+    binarySearchTree.insert('WE HACK, YOU REACT!').should.throw('no non-numbers allowed!');
+    
+    
+  });
+  
+
 });
