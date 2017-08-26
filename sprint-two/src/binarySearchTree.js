@@ -31,10 +31,53 @@ methods.insert = function(value) {
 }; 
 
 methods.contains = function(target) {
+  var parent = this;
+  var findTarget = function(parent) {
+    if (parent.value === target) {
+      return true;
+    }
 
+    if (parent.value > target && parent.left === null) {
+      return false;
+
+    } else if (parent.value > target) {
+      return findTarget(parent.left);
+
+    } else if (parent.value < target && parent.right === null) {
+      return false;
+
+    } else if (parent.value < target) {
+      return findTarget(parent.right); 
+    }
+
+    return false;
+  };
+
+  return findTarget(parent);
+  
 };
 
+
+// invoke callback on parent node value
+// if node.left not null
+  // recurse on left node
+// if node.right not null
+  // recurse on right node
+
 methods.depthFirstLog = function(callback) {
+  var invokeFuncOn = function(node) {
+    callback(node.value);
+
+    if (node.left) {
+      invokeFuncOn(node.left);
+    }
+
+    if (node.right) {
+      invokeFuncOn(node.right);
+    }
+  };
+
+  invokeFuncOn(this);
 };
 
 
