@@ -16,11 +16,11 @@ methods.insert = function(value) {
   var parent = this;
 
   var checkValue = function(parent) {
-    if (parent.value > value && parent.left === null) {
+    if (parent.value > value && !parent.left) {
       parent.left = newNode;
     } else if (parent.value > value) {
       checkValue(parent.left);
-    } else if (parent.value < value && parent.right === null) {
+    } else if (parent.value < value && !parent.right) {
       parent.right = newNode;
     } else if (parent.value < value) {
       checkValue(parent.right); 
@@ -36,21 +36,17 @@ methods.contains = function(target) {
     if (parent.value === target) {
       return true;
     }
-
-    if (parent.value > target && parent.left === null) {
+    if (parent.value > target && !parent.left) {
       return false;
-
     } else if (parent.value > target) {
       return findTarget(parent.left);
 
-    } else if (parent.value < target && parent.right === null) {
+    } else if (parent.value < target && !parent.right) {
       return false;
 
     } else if (parent.value < target) {
       return findTarget(parent.right); 
     }
-
-    return false;
   };
 
   return findTarget(parent);
