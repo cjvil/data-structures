@@ -40,10 +40,18 @@ HashTable.prototype.insert = function(k, v) {
 };
 
 
-// retrieve accepts a key and returns boolean
+// retrieve accepts a key and returns value
 HashTable.prototype.retrieve = function(k) {
   // get hashed index for key
   var index = getIndexBelowMaxForKey(k, this._limit);
+  //calculate length of tuples at index
+  //return false if length is zero
+  //iterate over each item in the tuple
+  //determine if the first string is the same string as k
+  //if the first string is the same string, return the tuples second string
+  // if the string is not found within any tuples
+  // return false;
+  
 };
 
 HashTable.prototype.remove = function(k) {

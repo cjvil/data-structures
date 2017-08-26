@@ -16,13 +16,13 @@ methods.insert = function(value) {
   var parent = this;
 
   var checkValue = function(parent) {
-    if(parent.value > value && parent.left === null) {
+    if (parent.value > value && parent.left === null) {
       parent.left = newNode;
-    } else if(parent.value > value) {
+    } else if (parent.value > value) {
       checkValue(parent.left);
-    } else if(parent.value < value && parent.right === null) {
+    } else if (parent.value < value && parent.right === null) {
       parent.right = newNode;
-    } else if(parent.value < value) {
+    } else if (parent.value < value) {
       checkValue(parent.right); 
     }
   };
