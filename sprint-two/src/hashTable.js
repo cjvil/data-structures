@@ -45,8 +45,8 @@ HashTable.prototype.retrieve = function(k) {
   // get hashed index for key
   var index = getIndexBelowMaxForKey(k, this._limit);
   //calculate length of tuples at index
-  tuples = this._storage.get(index);
-  var found = false;
+  var tuples = this._storage.get(index);
+  var found;
   //return false if length is zero
   if (tuples.length === 0) {
     return found;
@@ -66,6 +66,21 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
+  //store the tuple located at the index
+  var tuples = this._storage.get(index);
+  var deletionIndex;
+  // iterate over each tupple
+  _.each(tuples, function(tuple, tupleIndex) {
+    if (tuple[0] === k) {
+      deletionIndex = tupleIndex;
+    }
+  });
+
+  // if the first string in a tuple is the same as string k
+
+  // delete tupple
+  tuples.splice(deletionIndex, 1);
+  this._storage.set(index, tuples);
 };
 
 
