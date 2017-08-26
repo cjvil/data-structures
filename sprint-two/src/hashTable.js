@@ -83,6 +83,33 @@ HashTable.prototype.remove = function(k) {
   this._storage.set(index, tuples);
 };
 
+// RESIZE
+// collect all key-value pairs in var allPairs
+// iterate through storage
+  // iterate through tuples at index
+    // push tuple to allPairs
+// create new limited array with diff limit/ change limit (this._storage = LimitedArray(this._limit)
+// (need to calculate this: double or half 25 75 ideal tuple: storage ratio)
+// iterate through allPairs
+  // .insert() key, value (watch out for indices) [i][0], [i][1]
+
+HashTable.prototype.resize = function(newLimit) {
+  var allPairs = [];
+
+  this._storage.each(this._storage, function(tupleSet) {
+    for (var i = 0; i < tupleSet.length; i++) {
+      allPairs.push(tupleSet[i]);
+    }
+  });
+
+  this._storage = LimitedArray(newLimit);
+
+  _.each(allPairs, function(pair, index) {
+    this.insert(pair[index][0], pair[index][1]);
+  });
+
+  this.size = allPairs.length;
+};
 
 
 /*
