@@ -45,13 +45,23 @@ HashTable.prototype.retrieve = function(k) {
   // get hashed index for key
   var index = getIndexBelowMaxForKey(k, this._limit);
   //calculate length of tuples at index
+  tuples = this._storage.get(index);
+  var found = false;
   //return false if length is zero
+  if (tuples.length === 0) {
+    return found;
+  }
   //iterate over each item in the tuple
+  _.each(tuples, function(tuple) {
+    if (tuple[0] === k) {
+      found = tuple[1];
+    }
+  });
   //determine if the first string is the same string as k
   //if the first string is the same string, return the tuples second string
   // if the string is not found within any tuples
   // return false;
-  
+  return found;
 };
 
 HashTable.prototype.remove = function(k) {
