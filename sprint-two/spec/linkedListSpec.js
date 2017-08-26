@@ -52,4 +52,8 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should not throw an error when trying to remove head from an empty list', function() {
+    linkedList.removeHead();
+  });
+
 });

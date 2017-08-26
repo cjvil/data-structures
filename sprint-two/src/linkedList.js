@@ -18,6 +18,9 @@ var LinkedList = function() {
 
   list.removeHead = function() {
     // if list empty, return null
+    if(!list.head) {
+      return undefined;
+    }
 
     // save current head value in temp var previousHead
     var previousHeadValue = list.head.value;
