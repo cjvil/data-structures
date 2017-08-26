@@ -46,7 +46,7 @@ describe('hashTable', function() {
     expect(hashTable.retrieve(v2)).to.equal(v2);
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
-
+  
   // (Advanced! Remove the extra "x" when you want the following tests to run)
   xit ('should double in size when needed', function() {
     _.each(people, function(person) {
@@ -72,5 +72,12 @@ describe('hashTable', function() {
     hashTable.remove('John');
     hashTable.remove('Mr.');
     expect(hashTable._limit).to.equal(8);
+  });
+
+  it('should reverse key-value pairs', function() {
+    hashTable.insert('Steven', 'Tyler');
+    hashTable.reverse();
+    expect(hashTable.retrieve('Tyler')).to.equal('Steven');
+    
   });
 });
