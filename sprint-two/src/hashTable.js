@@ -1,7 +1,7 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
-  this._size = 0;
+  this.size = 0;
 };
 
 HashTable.prototype.insert = function(k, v) {
@@ -17,6 +17,14 @@ HashTable.prototype.insert = function(k, v) {
   output.push([k, v]);
   // send modified tuple array back into storage
   this._storage.set(index, output);
+  this.size++;
+
+  // if ratio of dataset to limit is 25% or less
+    // half size of hash table
+  if (this.size.length / this._limit >= .75) {
+    var double = Math.ceil(2 * this._limit); 
+    this.resize(double);
+  }
 };
 
 HashTable.prototype.retrieve = function(k) {
@@ -33,7 +41,7 @@ HashTable.prototype.retrieve = function(k) {
       found = tuple[1];
     }
   });
-
+  
   return found;
 };
 
@@ -51,6 +59,15 @@ HashTable.prototype.remove = function(k) {
 
   tuples.splice(deletionIndex, 1);
   this._storage.set(index, tuples);
+  this.size--;
+
+  // if ratio of dataset to limit is 25% or less,
+  // double size of hash table
+  if (this.size.length / this._limit <= .25) {
+    var half = Math.floor(.5 * this._limit); 
+    this.resize(half);
+  }
+  
 };
 
 // RESIZE
@@ -58,20 +75,21 @@ HashTable.prototype.remove = function(k) {
 // iterate through storage
   // iterate through tuples at index
     // push tuple to allPairs
-// create new limited array with diff limit/ change limit (this._storage = LimitedArray(this._limit)
-// (need to calculate this: double or half 25 75 ideal tuple: storage ratio)
+// create new limited array with diff limit/ change limit
 // iterate through allPairs
-  // .insert() key, value (watch out for indices) [i][0], [i][1]
+  // .insert() key, value
 
 HashTable.prototype.resize = function(newLimit) {
   var allPairs = [];
 
-  this._storage.each(this._storage, function(tupleSet) {
+  this._storage.each(function(tupleSet) {
     for (var i = 0; i < tupleSet.length; i++) {
       allPairs.push(tupleSet[i]);
     }
   });
 
+  // not going to work! assigns new hash table to
+  // storage prop. instead
   this._storage = LimitedArray(newLimit);
 
   _.each(allPairs, function(pair, index) {
@@ -80,7 +98,6 @@ HashTable.prototype.resize = function(newLimit) {
 
   this.size = allPairs.length;
 };
-
 
 /*
  * Complexity: What is the time complexity of the above functions?
