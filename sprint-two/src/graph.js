@@ -1,5 +1,3 @@
-
-
 // Instantiate a new graph
 var Graph = function() {
 };
@@ -14,13 +12,11 @@ Graph.prototype.contains = function(node) {
   return this.nodes[node] !== undefined;
 };
 
-// Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
   var arrayOfKeys = [];
   thisEdge = this.edges;
-  // edge case: check if node exists first
   delete this.nodes[node];
-  // look inside of the edges property 
+  
   for (var key in thisEdge) {
     arrayOfKeys.push(key);
   }
@@ -29,18 +25,16 @@ Graph.prototype.removeNode = function(node) {
       delete thisEdge[key];
     }
   });
-  
-  //use _.each to check the value of edge edge
-  //if the value within an edge matches the value of the node
-  // delete that edge object
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
   var found = false;
+
   if (this.edges.hasOwnProperty(fromNode + ',' + toNode)) {
     return found = true;
   }
+
   return found;
 };
 
