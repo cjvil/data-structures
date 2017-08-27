@@ -2,9 +2,8 @@ var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
 
- // your code here
   _.extend(newTree, treeMethods);
-  newTree.children = [];  // fix me
+  newTree.children = [];
 
   return newTree;
 };
@@ -21,9 +20,11 @@ treeMethods.contains = function(target) {
 
   var childSearch = function(parent) {
     var children = parent.children;
+
     if (parent.value === target) {
       return found = true;
     }
+
     if (children.length > 0) {
       console.log(parent);    
       console.log(children);
@@ -32,13 +33,10 @@ treeMethods.contains = function(target) {
       });
     }
   };    
+
   childSearch(parent, target);
-  return found;
-      
+  return found;    
 };
-
-
-
 
 /*
 * Complexity: What is the time complexity of the above functions?
